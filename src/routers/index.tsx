@@ -16,14 +16,24 @@ const HomeComponent = Loadable({
     return <div>Loading....</div>;
   },
 });
-
 const AboutComponent = Loadable({
-  loader: () => import('./About' /* webpackChunkName:"about" */),
+  loader: () => import('./About'),
   loading() {
     return <div>Loading....</div>;
   },
 });
-
+const ArticleComponent = Loadable({
+  loader: () => import('./Article'),
+  loading() {
+    return <div>Loading....</div>;
+  },
+});
+const ArticleAddComponent = Loadable({
+  loader: () => import('./Article/children/add'),
+  loading() {
+    return <div>Loading....</div>;
+  },
+});
 export class RouterComp extends React.Component {
   render() {
     return (
@@ -31,6 +41,8 @@ export class RouterComp extends React.Component {
         <Switch>
           <Route exact path="/" component={HomeComponent}/>
           <Route exact path="/about" component={AboutComponent}/>
+          <Route exact path="/article" component={ArticleComponent}/>
+          <Route exact path="/dev" component={ArticleAddComponent}/>
         </Switch>
       </Router>
     );

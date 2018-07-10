@@ -2,10 +2,13 @@ import * as React from 'react';
 import { Layout, Menu, Icon } from 'antd';
 
 const { Header, Sider, Content } = Layout;
+interface PageCommonComponentState {
+  collapsed:boolean;
+}
 
-export default class PageCommonComponent extends React.Component {
-  constructor() {
-    super();
+export default class PageCommonComponent extends React.Component<{}, PageCommonComponentState> {
+  constructor(props) {
+    super(props);
     this.state = {
       collapsed: false,
     };
@@ -22,7 +25,7 @@ export default class PageCommonComponent extends React.Component {
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1">
               <Icon type="user" />
-              <span>nav 1</span>
+              <span>写文章</span>
             </Menu.Item>
             <Menu.Item key="2">
               <Icon type="video-camera" />
@@ -43,7 +46,7 @@ export default class PageCommonComponent extends React.Component {
             />
           </Header>
           <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-            Content
+            { this.props.children }
           </Content>
         </Layout>
       </Layout>

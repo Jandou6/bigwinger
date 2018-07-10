@@ -12,7 +12,7 @@ const devServerOptions = Object.assign({}, webpack_config.devServer, {
     colors: true
   }
 });
-const PORT = '8080';
+const PORT = '8000';
 const HOST = '127.0.0.1';
 WebpackDevServer.addDevServerEntrypoints(webpack_config, devServerOptions);
 const compiler = webpack(webpack_config);
