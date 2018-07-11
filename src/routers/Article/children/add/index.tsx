@@ -59,8 +59,8 @@ class ArticleAddComponent extends React.Component<{}, ArticleAddComponentState> 
 
   change_input_value(state:string) {
     return (e) => {
-      this.setState({
-        [state]: event.target.value,
+      (this.setState as any)({
+        [state]: event.target.value || '',
       });
     };
   }

@@ -28,9 +28,6 @@ yarn build
 ```bash
 yarn start:prod
 ```
-
-## CLI
-you can use CLI to create view.
-```
-yarn cli -v
-```
+- [ ] 子路由
+- [ ] 整理文章页
+- [ ] 登录注册
