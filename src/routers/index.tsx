@@ -3,10 +3,8 @@ import 'antd/dist/antd.css';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Switch,
 } from 'react-router-dom';
-import { render } from 'react-dom';
 import { hot } from 'react-hot-loader';
 
 import * as Loadable from 'react-loadable';
@@ -28,12 +26,6 @@ const ArticleComponent = Loadable({
     return <div>Loading....</div>;
   },
 });
-const ArticleAddComponent = Loadable({
-  loader: () => import('./Article/children/add'),
-  loading() {
-    return <div>Loading....</div>;
-  },
-});
 export class RouterComp extends React.Component {
   render() {
     return (
@@ -41,8 +33,8 @@ export class RouterComp extends React.Component {
         <Switch>
           <Route exact path="/" component={HomeComponent}/>
           <Route exact path="/about" component={AboutComponent}/>
-          <Route exact path="/article" component={ArticleComponent}/>
-          <Route exact path="/dev" component={ArticleAddComponent}/>
+          <Route path="/article" component={ArticleComponent}/>
+          <Route component={HomeComponent} />
         </Switch>
       </Router>
     );
