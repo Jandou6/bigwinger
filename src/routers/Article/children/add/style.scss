@@ -8,3 +8,9 @@
 .login-form-button {
   width: 100%;
 }
+.preview {
+  border:1px solid #ccc;
+  code {
+    white-space: pre;
+  }
+}

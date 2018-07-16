@@ -13,9 +13,18 @@ class ArticleApi {
       console.info(e);
     }
   }
-  add_article(article_info) {
-    console.log(article_info);
+ async add_article(article_info) {
+    try {
+      const url = '//127.0.0.1:7001/article/add';
+      const responce = await axios.post(url, {
+        data: article_info,
+      });
+      return responce.data;
+    } catch (e) {
+      console.info(e);
+    }
   }
+
 }
 
 export default new ArticleApi();

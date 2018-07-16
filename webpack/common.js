@@ -1,7 +1,6 @@
-const webpack = require('webpack');
 const CONFIG = require('./config');
-const tsImportPluginFactory = require('ts-import-plugin')
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 module.exports = {
   entry: {
     app: [
@@ -41,4 +40,10 @@ module.exports = {
       }
     ],
   },
+  plugins: [
+    new CopyWebpackPlugin([{
+      from: path.resolve(__dirname, '../libs/highlight.pack.js'),
+      to: 'libs/highlight.pack.js',
+    }]),
+  ]
 }
