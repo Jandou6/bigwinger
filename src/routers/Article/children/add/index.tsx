@@ -12,7 +12,7 @@ import article_api from '../../model/api';
 import '../libs/vs2015.css';
 interface ArticleAddComponentState {
   title:string;
-  content:string;
+  md_content:string;
   tag:string;
   html_content:string;
   commit:boolean;
@@ -24,7 +24,7 @@ class ArticleAddComponent extends React.Component<RouteComponentProps<any>, Arti
     super(props);
     this.state = {
       title:'',
-      content:'',
+      md_content:'',
       tag:'',
       html_content:'',
       commit:false,
@@ -50,7 +50,7 @@ class ArticleAddComponent extends React.Component<RouteComponentProps<any>, Arti
             <Input placeholder="tag" value={ this.state.tag }  onChange={ this.change_input_value('tag') }/>
           </FormItem>
           <FormItem>
-            <TextArea value={ this.state.content } placeholder="Autosize height with minimum and maximum number of lines" autosize={{ minRows: 20}} onChange={ this.change_input_value('content') }/>
+            <TextArea value={ this.state.md_content } placeholder="Autosize height with minimum and maximum number of lines" autosize={{ minRows: 20}} onChange={ this.change_input_value('md_content') }/>
           </FormItem>
           <FormItem>
             <Button type="primary" className="login-form-button" onClick={ this.handle_preview }>
@@ -62,7 +62,7 @@ class ArticleAddComponent extends React.Component<RouteComponentProps<any>, Arti
           </FormItem>
         </Form>
         <div styleName="preview" >
-          { this.state.html_content }
+          <div dangerouslySetInnerHTML={{__html: this.state.html_content}}></div>
         </div>
         <Modal
           title="文章添加成功"
@@ -81,7 +81,7 @@ class ArticleAddComponent extends React.Component<RouteComponentProps<any>, Arti
 
   convert_markdown_to_html(callback = () => {}) {
 
-    const html_content = markdown.toHTML(this.state.content);
+    const html_content = markdown.toHTML(this.state.md_content);
     this.setState(
       {
         html_content,
@@ -112,6 +112,7 @@ class ArticleAddComponent extends React.Component<RouteComponentProps<any>, Arti
         title: this.state.title,
         tag: this.state.tag,
         content: this.state.html_content,
+        md_content: this.state.md_content,
       };
       const result = await article_api.add_article(article_data);
       if (result.code === 200) {

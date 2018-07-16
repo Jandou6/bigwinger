@@ -9,7 +9,8 @@
   width: 100%;
 }
 .preview {
-  border:1px solid #ccc;
+  max-width: 800px;
+  margin: 0 auto;
   code {
     white-space: pre;
   }
