@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const WebpackMd5Hash = require('webpack-md5-hash');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -98,7 +97,6 @@ module.exports = {
       root: CONFIG.DIST_PATH,
     }),
 
-    new WebpackMd5Hash(),
     new webpack.HashedModuleIdsPlugin(),
     new ExtractTextPlugin({
       filename: '[name]_[chunkhash:5].css',
