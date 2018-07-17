@@ -8,7 +8,7 @@ module.exports = {
   output: {
     filename: '[name].js',
   },
-  devtool: 'eval-source-map',
+  devtool: 'cheap-module-eval-source-map',
   mode: 'development',
   module: {
     rules: [{
@@ -28,7 +28,14 @@ module.exports = {
         loader: ExtractTextPlugin.extract({
           use: [
             'style-loader',
-            'happypack/loader?id=css_module',
+            {
+              loader: 'css-loader',
+              query: {
+                modules: true,
+                importLoaders: 3,
+                localIdentName: '[local]_[hash:base64:5]',
+              }
+            },
             {
               loader: 'postcss-loader',
               options: {
@@ -53,7 +60,7 @@ module.exports = {
               },
             },
             'resolve-url-loader',
-            'happypack/loader?id=sass',
+            'sass-loader',
           ],
         }),
 
@@ -61,13 +68,13 @@ module.exports = {
       {
         test: /\.(css)$/,
         loader: ExtractTextPlugin.extract({
-          use: 'happypack/loader?id=css',
+          use: 'css-loader',
           fallback: 'style-loader',
         }),
       },
       {
         test: /\.(jpg|png)$/,
-        use: `url-loader?limit=10&name=asset/[name]_[hash:5].[ext]`,
+        use: `url-loader?limit=10&name=asset/[name].[ext]`,
         exclude: /(node_modules)/,
       },
     ],
@@ -78,7 +85,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       filename: CONFIG.INDEX_HTML,
-      chunks: ['app'],
+      chunks: ['app', 'commons'],
       template: CONFIG.HTML_TEMPLATE_PATH,
     }),
     new webpack.DllReferencePlugin({
@@ -99,4 +106,16 @@ module.exports = {
       allChunks: true,
     }),
   ],
+  optimization: {
+    minimize: true,
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          name: "commons",
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'all',
+        },
+      }
+    },
+  }
 }

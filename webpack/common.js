@@ -14,7 +14,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.webpack.js', '.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx', '.js'],
     modules: [
       'node_modules',
     ],
@@ -35,7 +35,7 @@ module.exports = {
       },
       {
         test: /\.json$/,
-        loader: 'happypack/loader?id=json',
+        use: 'json-loader',
         exclude: /(node_modules)/,
       }
     ],

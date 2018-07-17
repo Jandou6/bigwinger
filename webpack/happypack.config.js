@@ -1,6 +1,6 @@
 const HappyPack = require('happypack');
 
-const happypack_thread_pool = HappyPack.ThreadPool({ size: 4 });
+const happypack_thread_pool = HappyPack.ThreadPool({ size: 2 });
 
 module.exports = {
   plugins: [
@@ -31,48 +31,6 @@ module.exports = {
           },
         }
       ],
-    }),
-    new HappyPack({
-      id: 'css',
-      threadPool: happypack_thread_pool,
-      loaders: ['css-loader'],
-    }),
-    new HappyPack({
-      id: 'css_module',
-      threadPool: happypack_thread_pool,
-      loaders: [
-        {
-          path: 'css-loader',
-          query: {
-            modules: true,
-            importLoaders: 3,
-            localIdentName: '[local]_[hash:base64:5]',
-          }
-        }
-      ],
-    }),
-    new HappyPack({
-      id: 'sass',
-      threadPool: happypack_thread_pool,
-      loaders: [
-        {
-          path: 'sass-loader',
-          query: {
-            sourceMap: false
-          }
-        }
-      ],
-    }),
-    new HappyPack({
-      id: 'json',
-      threadPool: happypack_thread_pool,
-      loaders: ['json-loader'],
-    }),
-
-    new HappyPack({
-      id: 'url',
-      threadPool: happypack_thread_pool,
-      loaders: ['url-loader'],
     }),
   ],
 }
