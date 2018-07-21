@@ -1,8 +1,9 @@
 import axios from 'axios';
+import CONFIG from '../../../config';
 class ArticleApi {
   async get_article_list(page = 0) {
     try {
-      const url = '//127.0.0.1:7001/article';
+      const url = `//${CONFIG.host}:${CONFIG.port}/article`;
       const responce = await axios.get(url, {
         params: {
           page,
@@ -15,7 +16,7 @@ class ArticleApi {
   }
  async add_article(article_info) {
     try {
-      const url = '//127.0.0.1:7001/article/add';
+      const url = `//{CONFIG.host}:${CONFIG.port}/article/add`;
       const responce = await axios.post(url, {
         data: article_info,
       });

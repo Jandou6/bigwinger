@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Layout, Menu, Icon } from 'antd';
-
+import {
+  Link,
+} from 'react-router-dom';
 const { Header, Sider, Content } = Layout;
 interface PageCommonComponentState {
   collapsed:boolean;
@@ -24,8 +26,10 @@ export default class PageCommonComponent extends React.Component<{}, PageCommonC
           <div className="logo" />
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
             <Menu.Item key="1">
+            <Link to="/article">
               <Icon type="user" />
               <span>写文章</span>
+            </Link>
             </Menu.Item>
             <Menu.Item key="2">
               <Icon type="video-camera" />

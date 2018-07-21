@@ -53,6 +53,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      __DEV__: process.env.NODE_ENV !== 'production',
+    }),
     new webpack.NamedModulesPlugin(),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, '../libs/highlight.pack.js'),
