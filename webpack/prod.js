@@ -135,9 +135,7 @@ module.exports = {
   optimization: {
     minimize: true,
     minimizer: [
-      new UglifyJsPlugin({
-        parallel: 4
-      })
+      new UglifyJsPlugin()
     ],
     splitChunks: {
       cacheGroups: {
