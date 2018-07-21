@@ -11,17 +11,7 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   mode: 'development',
   module: {
-    rules: [{
-        enforce: 'pre',
-        test: /\.(ts|tsx)?$/,
-        use: [{
-          loader: 'tslint-loader',
-          options: {
-            emitErrors: false,
-          }
-        }],
-        exclude: /node_modules/,
-      },
+    rules: [
       {
         test: /\.scss$/,
         exclude: /(node_modules)/,
@@ -81,7 +71,6 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       filename: CONFIG.INDEX_HTML,
@@ -106,16 +95,16 @@ module.exports = {
       allChunks: true,
     }),
   ],
-  optimization: {
-    minimize: true,
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          name: "commons",
-          test: /[\\/]node_modules[\\/]/,
-          chunks: 'all',
-        },
-      }
-    },
-  }
+  // optimization: {
+  //   minimize: true,
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       commons: {
+  //         name: "commons",
+  //         test: /[\\/]node_modules[\\/]/,
+  //         chunks: 'all',
+  //       },
+  //     }
+  //   },
+  // }
 }

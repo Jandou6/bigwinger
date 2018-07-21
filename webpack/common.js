@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const CONFIG = require('./config');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
@@ -26,6 +27,17 @@ module.exports = {
   module: {
     rules: [
       {
+        enforce: 'pre',
+        test: /\.(ts|tsx)?$/,
+        use: [{
+          loader: 'tslint-loader',
+          options: {
+            emitErrors: false,
+          }
+        }],
+        exclude: /node_modules/,
+      },
+      {
         test: /\.(ts|tsx)?$/,
         use: [
           'happypack/loader?id=babel',
@@ -41,6 +53,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.NamedModulesPlugin(),
     new CopyWebpackPlugin([{
       from: path.resolve(__dirname, '../libs/highlight.pack.js'),
       to: 'libs/highlight.pack.js',

@@ -1,4 +1,5 @@
 const HappyPack = require('happypack');
+const tsImportPluginFactory = require('ts-import-plugin')
 
 const happypack_thread_pool = HappyPack.ThreadPool({ size: 2 });
 

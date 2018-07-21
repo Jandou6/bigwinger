@@ -5,6 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CompressionPlugin = require("compression-webpack-plugin");
 const CONFIG = require('./config');
+const wpa = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 module.exports = {
   entry: {
     commons: [...CONFIG.LIBRARIES],
@@ -93,17 +94,12 @@ module.exports = {
     ]
   },
   plugins: [
+    // new wpa(),
     new CleanWebpackPlugin(CONFIG.DIST_DIST, {
       root: CONFIG.DIST_PATH,
     }),
 
     new webpack.HashedModuleIdsPlugin(),
-    new ExtractTextPlugin({
-      filename: '[name]_[chunkhash:5].css',
-      allChunks: true,
-      ignoreOrder: true,
-    }),
-
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false,
@@ -123,10 +119,15 @@ module.exports = {
         removeEmptyAttributes: true,
       }
     }),
+    new ExtractTextPlugin({
+      filename: '[name]_[chunkhash:5].css',
+      allChunks: true,
+      ignoreOrder: true,
+    }),
     new CompressionPlugin({
       asset: "[path].gz[query]",
       algorithm: "gzip",
-      test: /\.js$|\.css$|\.html$/,
+      test: /\.js$|\.css$/,
       threshold: 10240,
       minRatio: 0.8
     }),
@@ -142,7 +143,14 @@ module.exports = {
       cacheGroups: {
         commons: {
           name: "commons",
-          test: /[\\/]node_modules[\\/]/,
+          test: function (module) {
+            // this assumes your vendor imports exist in the node_modules directory
+            let is_common_chunk =  module.context && module.context.includes('node_modules');
+            if (is_common_chunk && module.context.includes('style')) {
+              is_common_chunk = false;
+            }
+            return is_common_chunk;
+          },
           chunks: 'all',
         },
       }
