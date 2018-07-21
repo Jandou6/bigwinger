@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const CONFIG = require('./config');
+const tsImportPluginFactory = require('ts-import-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 module.exports = {
@@ -40,8 +41,23 @@ module.exports = {
       {
         test: /\.(ts|tsx)?$/,
         use: [
-          'happypack/loader?id=babel',
-          'happypack/loader?id=ts',
+          'babel-loader',
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              getCustomTransformers: () => ({
+                before: [ tsImportPluginFactory({
+                  libraryName: 'antd',
+                  libraryDirectory: 'es',
+                  style: 'css'
+                })]
+              }),
+              compilerOptions: {
+                module: 'es2015'
+              }
+            },
+          }
         ],
         exclude: /(node_modules)/
       },
