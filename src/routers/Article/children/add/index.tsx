@@ -1,4 +1,5 @@
 import * as React from 'react';
+require('../libs/vs2015.css');
 import { hot } from 'react-hot-loader';
 import { Form, Input, Button, Icon, Modal } from 'antd';
 const FormItem = Form.Item;
@@ -9,7 +10,6 @@ const style = require('./style.scss');
 import { markdown } from 'markdown';
 import article_api from '../../model/api';
 
-import '../libs/vs2015.css';
 interface ArticleAddComponentState {
   title:string;
   md_content:string;
