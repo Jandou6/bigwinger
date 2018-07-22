@@ -16,7 +16,7 @@ class ArticleApi {
   }
  async add_article(article_info) {
     try {
-      const url = `//{CONFIG.host}:${CONFIG.port}/article/add`;
+      const url = `//${CONFIG.host}:${CONFIG.port}/article/add`;
       const responce = await axios.post(url, {
         data: article_info,
       });
