@@ -16,6 +16,9 @@ interface ArticleAddComponentState {
   tag:string;
   html_content:string;
   commit:boolean;
+  cover:string;
+  brief:string;
+  author:string;
 }
 @CSSModules(style, {allowMultiple: true})
 class ArticleAddComponent extends React.Component<RouteComponentProps<any>, ArticleAddComponentState> {
@@ -27,7 +30,10 @@ class ArticleAddComponent extends React.Component<RouteComponentProps<any>, Arti
       md_content:'',
       tag:'',
       html_content:'',
+      cover: 'https://gw.alicdn.com/tfs/TB15lFuuGmWBuNjy1XaXXXCbXXa-900-500.jpg',
+      brief: '',
       commit:false,
+      author: '',
     };
     this.handleOk = this.handleOk.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -48,6 +54,15 @@ class ArticleAddComponent extends React.Component<RouteComponentProps<any>, Arti
           </FormItem>
           <FormItem>
             <Input placeholder="tag" value={ this.state.tag }  onChange={ this.change_input_value('tag') }/>
+          </FormItem>
+          <FormItem>
+            <Input placeholder="封面连接"  value={ this.state.cover } onChange={ this.change_input_value('cover') }/>
+          </FormItem>
+          <FormItem>
+            <Input placeholder="简介"  value={ this.state.brief } onChange={ this.change_input_value('brief') }/>
+          </FormItem>
+          <FormItem>
+            <Input placeholder="作者签名"  value={ this.state.author } onChange={ this.change_input_value('author') }/>
           </FormItem>
           <FormItem>
             <TextArea value={ this.state.md_content } placeholder="Autosize height with minimum and maximum number of lines" autosize={{ minRows: 20}} onChange={ this.change_input_value('md_content') }/>
@@ -113,6 +128,9 @@ class ArticleAddComponent extends React.Component<RouteComponentProps<any>, Arti
         tag: this.state.tag,
         content: this.state.html_content,
         md_content: this.state.md_content,
+        brief: this.state.brief,
+        cover: this.state.cover,
+        author: this.state.author,
       };
       const result = await article_api.add_article(article_data);
       if (result.code === 200) {
