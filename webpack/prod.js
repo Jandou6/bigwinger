@@ -7,9 +7,6 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const CONFIG = require('./config');
 const wpa = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 module.exports = {
-  entry: {
-    commons: [...CONFIG.LIBRARIES],
-  },
   output: {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].js',
