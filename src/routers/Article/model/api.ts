@@ -26,6 +26,20 @@ class ArticleApi {
     }
   }
 
+  async get_article_by_id(id:number) {
+    try {
+      const url = `//${CONFIG.host}:${CONFIG.port}/article/get`;
+      const responce = await axios.get(url, {
+        params: {
+          id,
+        },
+      });
+      return responce.data;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
 }
 
 export default new ArticleApi();

@@ -9,6 +9,7 @@ import {
 const style = require('./style.scss');
 import PageCommonComponent from '../../component/common';
 import AddCom from './children/add';
+import UpdateCom from './children/update';
 import ArticleList from './children/lists';
 
 interface ArticleComponentState {
@@ -25,6 +26,7 @@ class ArticleComponent extends React.Component<{}, ArticleComponentState> {
         <PageCommonComponent>
             <Switch>
               <Route key="/article/add" path="/article/add" component={ AddCom }/>
+              <Route key="/article/update" path="/article/update/:id" component={ UpdateCom }/>
               <Route key="/article" path="/article" component={ ArticleList }/>
             </Switch>
         </PageCommonComponent>

@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { Table, Icon, Divider } from 'antd';
-
-const { Column, ColumnGroup } = Table;
+import { Table, Divider } from 'antd';
+import {
+  Link,
+} from 'react-router-dom';
+const { Column } = Table;
 
 interface TableComponentProps {
   data:any;
@@ -34,15 +36,15 @@ export default class TableComponent extends React.Component<TableComponentProps,
       <Column
         title="Action"
         key="action"
-        render={(text, record:any) => (
+        dataIndex="id"
+        render={(id:number, record:any) => (
           <span>
-            <a href="javascript:;">Action 一</a>
+            <Link to={'/article/update/' + id}>
+              <span>修改</span>
+            </Link>
             <Divider type="vertical" />
             <a href="javascript:;">Delete</a>
             <Divider type="vertical" />
-            <a href="javascript:;" className="ant-dropdown-link">
-              More actions <Icon type="down" />
-            </a>
           </span>
         )}
       />

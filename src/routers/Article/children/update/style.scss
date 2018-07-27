@@ -1,0 +1,32 @@
+.update-article-area {
+  display: flex;
+  .left-area {
+    width:50%;
+    padding:10px;
+    
+    .login-form {
+      max-width: 800px;
+      margin-top:40px;
+    }
+    .login-form-forgot {
+      float: right;
+    }
+    .login-form-button {
+      width: 100%;
+    }
+  }
+  .right-area {
+    border-radius: 4px;
+    box-shadow: 0 0 0 0.75pt #d1d1d1, 0 0 3pt 0.75pt #ccc;
+    padding:10px;
+    width:50%;
+    .preview {
+      max-width: 800px;
+      margin: 0 auto;
+      code {
+        white-space: pre;
+      }
+    }
+  }
+}
+
