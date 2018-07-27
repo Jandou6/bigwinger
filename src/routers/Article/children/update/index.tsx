@@ -139,8 +139,9 @@ class ArticleUpdateComponent extends React.Component<RouteComponentProps<any>, A
         brief: this.state.brief,
         cover: this.state.cover,
         author: this.state.author,
+        id: this.props.match.params.id,
       };
-      const result = await article_api.add_article(article_data);
+      const result = await article_api.update_article(article_data);
       if (result.code === 200) {
         this.setState({
           commit: true,

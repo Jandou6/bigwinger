@@ -40,6 +40,18 @@ class ArticleApi {
     }
   }
 
+  async update_article(article_info) {
+    try {
+      const url = `//${CONFIG.host}:${CONFIG.port}/article/update`;
+      const responce = await axios.post(url, {
+        data: article_info,
+      });
+      return responce.data;
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
 }
 
 export default new ArticleApi();
