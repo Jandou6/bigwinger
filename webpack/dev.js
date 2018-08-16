@@ -13,56 +13,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.scss$/,
-        exclude: /(node_modules)/,
-        loader: ExtractTextPlugin.extract({
-          use: [
-            'style-loader',
-            {
-              loader: 'css-loader',
-              query: {
-                modules: true,
-                importLoaders: 3,
-                localIdentName: '[local]_[hash:base64:5]',
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true,
-                plugins: function () {
-                  return [
-                    require('autoprefixer')({
-                      browsers: [
-                        'Chrome >= 35',
-                        'Firefox >= 38',
-                        'Edge >= 12',
-                        'Explorer >= 10',
-                        'iOS >= 8',
-                        'Safari >= 8',
-                        'Android 2.3',
-                        'Android >= 4',
-                        'Opera >= 12',
-                      ]
-                    }),
-                  ];
-                },
-              },
-            },
-            'resolve-url-loader',
-            'sass-loader',
-          ],
-        }),
-
-      },
-      {
-        test: /\.(css)$/,
-        loader: ExtractTextPlugin.extract({
-          use: 'css-loader',
-          fallback: 'style-loader',
-        }),
-      },
-      {
         test: /\.(jpg|png)$/,
         use: `url-loader?limit=10&name=asset/[name].[ext]`,
         exclude: /(node_modules)/,
@@ -95,16 +45,4 @@ module.exports = {
       allChunks: true,
     }),
   ],
-  // optimization: {
-  //   minimize: true,
-  //   splitChunks: {
-  //     cacheGroups: {
-  //       commons: {
-  //         name: "commons",
-  //         test: /[\\/]node_modules[\\/]/,
-  //         chunks: 'all',
-  //       },
-  //     }
-  //   },
-  // }
 }

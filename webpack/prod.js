@@ -14,65 +14,7 @@ module.exports = {
   devtool: 'hidden-source-map',
   mode: 'production',
   module: {
-    rules: [{
-        test: /\.scss$/,
-        exclude: /(node_modules)/,
-        use: ExtractTextPlugin.extract({
-          use: [{
-              loader: 'css-loader',
-              options: {
-                sourceMap: false,
-                modules: true,
-                importLoaders: 3,
-                localIdentName: '[local]_[chunkhash:5]',
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: false,
-                plugins: function () {
-                  return [
-                    require('autoprefixer')({
-                      browsers: [
-                        'Chrome >= 35',
-                        'Firefox >= 38',
-                        'Edge >= 12',
-                        'Explorer >= 10',
-                        'iOS >= 8',
-                        'Safari >= 8',
-                        'Android 2.3',
-                        'Android >= 4',
-                        'Opera >= 12',
-                      ]
-                    }),
-                  ];
-                },
-              },
-            },
-            {
-              loader: 'resolve-url-loader',
-              options: {
-                sourceMap: false,
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: false,
-              }
-            },
-          ],
-          fallback: 'style-loader',
-        }),
-      },
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          use: ['css-loader'],
-          fallback: 'style-loader',
-        }),
-      },
+    rules: [
       {
         test: /\.png$/,
         use: `url-loader?limit=10&mimetype=image/png&name=assets/[name]_[hash:5].[ext]`,
